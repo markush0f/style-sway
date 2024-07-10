@@ -7,11 +7,7 @@ export class InMemoryPostRepository extends PostRepository {
     private posts: PrimitivePost[] = [];
 
     async create(post: Post): Promise<void> {
-        try {
-            this.posts.push(post.toValue());
-        } catch (error) {
-            throw error;
-        }
+        this.posts.push(post.toValue());
     }
 
     async findById(id: UUID): Promise<Post | null> {
@@ -19,8 +15,12 @@ export class InMemoryPostRepository extends PostRepository {
         return post ? new Post(post) : null;
     }
 
-    remove(): Promise<void> {
-        throw new Error("Method not implemented.");
+    remove(id: UUID): Promise<void> {
+        const index = this.posts.findIndex(post => post.id === id);
+        if (index !== -1) {
+            this.posts.splice(index, 1);
+        }
+        return Promise.resolve();
     }
     like(): Promise<void> {
         throw new Error("Method not implemented.");
