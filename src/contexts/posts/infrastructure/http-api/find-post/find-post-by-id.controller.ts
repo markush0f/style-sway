@@ -2,7 +2,7 @@ import { Body, Controller, Get, Param, Post } from "@nestjs/common";
 import { CreatePostUseCase } from "src/contexts/posts/app/create-post-use-case/create-post.use.case";
 import { PostRepository } from "src/contexts/posts/domain/post.repository";
 import { PrimitivePost } from "src/contexts/posts/domain/post.entity";
-import { FindPostByIdUseCase } from "src/contexts/posts/app/find-post-by-id/find-post-by-id.use.case";
+import { FindPostByIdUseCase } from "src/contexts/posts/app/find-post-use-case/find-post-by-id.use.case";
 import { UUID } from "crypto";
 
 @Controller('posts')

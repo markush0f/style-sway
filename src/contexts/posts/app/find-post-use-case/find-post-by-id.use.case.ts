@@ -11,7 +11,7 @@ export class FindPostByIdUseCase {
     async execute(id: UUID): Promise<{ post: PrimitivePost }> {
         // const post = Post
 
-        const post = await this.postRepository.findById(id);
+        const post = await this.postRepository.findOneById(id);
         return {
             post: post.toValue()
         };

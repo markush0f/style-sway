@@ -3,11 +3,10 @@ import { PostRepository } from "../../domain/post.repository";
 import { UUID } from "crypto";
 
 @Injectable()
-export class LikePostUseCase {
+export class DeletePostUseCase {
     constructor(private readonly postRepository: PostRepository) { }
-    
-    async execute(@Param() id: UUID): Promise<void> {
-        await this.postRepository.like(id);
-        
+
+    execute(@Param() id: UUID): void {
+        this.postRepository.delete(id);
     }
 }

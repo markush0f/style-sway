@@ -4,6 +4,7 @@ export interface PrimitivePost {
     id: UUID;
     title: string;
     content: string;
+    likes: number;
     userId: UUID;
     date: string;
 }
@@ -20,6 +21,7 @@ export class Post {
             id: randomUUID(),
             title: createPost.title,
             content: createPost.content,
+            likes: 0,
             userId: createPost.userId,
             date: new Date().toISOString()
         });
@@ -30,6 +32,7 @@ export class Post {
             id: this.attributes.id,
             title: this.attributes.title,
             content: this.attributes.content,
+            likes: this.attributes.likes,
             userId: this.attributes.userId,
             date: this.attributes.date
         }
