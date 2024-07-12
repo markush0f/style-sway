@@ -2,7 +2,7 @@ import { UUID } from "crypto";
 import { Post } from "./post.entity";
 
 export abstract class PostRepository {
-    abstract create(post: Post): Promise<void>;
+    abstract create(post: Post): Promise<Post>;
     abstract findOneById(id: UUID): Promise<Post | null>;
     abstract delete(id: UUID): Promise<void>;
     abstract like(id: UUID): Promise<void>;

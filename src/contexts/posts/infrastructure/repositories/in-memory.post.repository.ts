@@ -35,11 +35,12 @@ export class InMemoryPostRepository extends PostRepository {
     ];
     private mutex = new Mutex();
 
-    async create(post: Post): Promise<void> {
+    async create(post: Post): Promise<Post> {
         const release = await this.mutex.acquire();
         console.log(this.posts);
         try {
             this.posts.push(post.toValue());
+            return post;
         } finally {
             release();
         }
