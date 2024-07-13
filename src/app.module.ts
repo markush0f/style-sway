@@ -13,10 +13,10 @@ import { AuthGuard } from './contexts/shared/guards/auth.guard';
     ConfigModule.forRoot({ isGlobal: true })
   ],
   providers: [
-    // {
-    //   provide: APP_GUARD,
-    //   useClass: AuthGuard
-    // }
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard
+    }
   ],
 
 })

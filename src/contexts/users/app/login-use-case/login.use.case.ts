@@ -17,6 +17,7 @@ export class LoginUseCase {
     ) { }
 
     async execute(loginUserDto: LoginUserDto): Promise<{ accessToken: AccessTokenPayload, user: PrimitiveUser }> {
+        console.log('enter here')
         const user: User = await this.userRepository.findOneByEmail(loginUserDto.email);
         if (!user) {
             throw new UserNotFoundExceptionByEmail(loginUserDto.email);

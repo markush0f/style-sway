@@ -4,11 +4,13 @@ import {  PrimitiveUser, User } from "src/contexts/users/domain/user.entity";
 import { LoginDto } from "./login.http-dto";
 import { AccessTokenPayload } from "src/contexts/shared/types/accessTokenPayload.type";
 import { AuthGuard } from "@nestjs/passport";
+import { Public } from "src/contexts/shared/decorators/public.decorator";
 
 @Controller('users')
 export class LoginController {
     constructor(private readonly loginUseCase: LoginUseCase) { }
 
+    @Public()
     @UseGuards(AuthGuard('local'))
     @Post('login')
     async run(@Body() loginDto: LoginDto): Promise<{ accessToken: AccessTokenPayload, user: PrimitiveUser }> {

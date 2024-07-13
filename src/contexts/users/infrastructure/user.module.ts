@@ -9,13 +9,14 @@ import { JwtStrategy } from "src/contexts/shared/utils/jwtStrategy";
 import { ValidateUser } from "src/contexts/shared/utils/validate-user";
 import { LoginController } from "./http-api/login/login.controller";
 import { LoginUseCase } from "../app/login-use-case/login.use.case";
+import { JWT_CONSTANT } from "src/contexts/shared/secret/jwt.constant";
 
 @Module({
     imports: [
         JwtModule.registerAsync({
             imports: [ConfigModule],
             useFactory: async (configService: ConfigService) => ({
-                secret: '12324',
+                secret: JWT_CONSTANT,
                 signOptions: { expiresIn: '1d' }
             })
         })
