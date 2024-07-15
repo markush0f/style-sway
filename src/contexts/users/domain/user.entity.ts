@@ -34,11 +34,11 @@ export class User {
     toValue(): PrimitiveUser {
         return{
             id: this.attributes.id,
-            name: this.attributes.name,
-            surname: this.attributes.surname,
+            name: this.attributes.name.toString(),
+            surname: this.attributes.surname.toString(),
             birth: this.attributes.birth,
-            email: this.attributes.email,
-            password: this.attributes.password
+            email: this.attributes.email.toString(),
+            password: this.attributes.password.toString()
         }
     }
 }

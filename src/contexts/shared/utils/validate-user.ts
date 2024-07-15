@@ -6,7 +6,9 @@ export class ValidateUser {
 
     constructor() { }
     async validatePassword(passwordReceived: string, userPassword: string): Promise<boolean> {
-        const isMatch = await bcrypt.compare(userPassword, passwordReceived);
+        console.log(passwordReceived, userPassword)
+        const isMatch = await bcrypt.compare(passwordReceived, userPassword);
+
         if (!isMatch) {
             return false;
         }

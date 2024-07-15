@@ -1,19 +1,18 @@
 import { Body, Controller, Post, UseGuards } from "@nestjs/common";
 import { LoginUseCase } from "src/contexts/users/app/login-use-case/login.use.case";
-import {  PrimitiveUser, User } from "src/contexts/users/domain/user.entity";
-import { LoginDto } from "./login.http-dto";
-import { AccessTokenPayload } from "src/contexts/shared/types/accessTokenPayload.type";
-import { AuthGuard } from "@nestjs/passport";
+import { LoginHttpDto } from "./login.http-dto";
 import { Public } from "src/contexts/shared/decorators/public.decorator";
+import { ReturnUser } from "src/contexts/shared/types/returnUser.type";
 
 @Controller('users')
 export class LoginController {
     constructor(private readonly loginUseCase: LoginUseCase) { }
 
     @Public()
-    @UseGuards(AuthGuard('local'))
+    // Buscar solucion para las estrategias
+    // @UseGuards(AuthGuard('local'))
     @Post('login')
-    async run(@Body() loginDto: LoginDto): Promise<{ accessToken: AccessTokenPayload, user: PrimitiveUser }> {
+    async run(@Body() loginDto: LoginHttpDto): Promise<{ accessToken: string, user: ReturnUser }> {
         return await this.loginUseCase.execute(loginDto);
     }
 }

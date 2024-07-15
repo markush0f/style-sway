@@ -10,6 +10,7 @@ import { ValidateUser } from "src/contexts/shared/utils/validate-user";
 import { LoginController } from "./http-api/login/login.controller";
 import { LoginUseCase } from "../app/login-use-case/login.use.case";
 import { JWT_CONSTANT } from "src/contexts/shared/secret/jwt.constant";
+import { JwtHelper } from "src/contexts/shared/utils/jwt";
 
 @Module({
     imports: [
@@ -19,7 +20,7 @@ import { JWT_CONSTANT } from "src/contexts/shared/secret/jwt.constant";
                 secret: JWT_CONSTANT,
                 signOptions: { expiresIn: '1d' }
             })
-        })
+        }),
     ],
     controllers: [LoginController],
     providers: [
@@ -29,6 +30,7 @@ import { JWT_CONSTANT } from "src/contexts/shared/secret/jwt.constant";
         ValidateUser,
         InMemoryUserRepository,
         LoginUseCase,
+        JwtHelper,
         {
             provide: UserRepository,
             useExisting: InMemoryUserRepository
