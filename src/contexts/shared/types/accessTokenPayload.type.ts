@@ -1,5 +1,5 @@
-import { UUID } from "crypto"
+import { UUID } from "crypto";
 
 export type AccessTokenPayload = {
-    id: UUID
-}
+  userId: UUID;
+};

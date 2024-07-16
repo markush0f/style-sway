@@ -1,14 +1,13 @@
 import { IsEmail, IsString } from "class-validator";
 
 export class SignupDto {
+  name: string;
 
-    name: string;
+  surname: string;
 
-    surname: string;
+  birth: string;
 
-    birth: string;
+  email: string;
 
-    email: string;
-
-    password: string;
+  password: string;
 }

@@ -6,16 +6,13 @@ import { UserNotFoundException } from "../../domain/exceptions/user-not-found.ex
 
 @Injectable()
 export class FindOneUserUseCase {
-    constructor(
-        private readonly userRepository: UserRepository,
-    ) { }
+  constructor(private readonly userRepository: UserRepository) {}
 
-    async execute(id: UUID): Promise<{ user: PrimitiveUser }> {
-        const user: User = await this.userRepository.findOneById(id);
-        if (!user) {
-            throw new UserNotFoundException(id);
-        }
-        return { user: user.toValue() };
-
+  async execute(id: UUID): Promise<{ user: PrimitiveUser }> {
+    const user: User = await this.userRepository.findOneById(id);
+    if (!user) {
+      throw new UserNotFoundException(id);
     }
+    return { user: user.toValue() };
+  }
 }

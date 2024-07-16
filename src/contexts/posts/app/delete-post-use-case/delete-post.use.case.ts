@@ -4,9 +4,11 @@ import { UUID } from "crypto";
 
 @Injectable()
 export class DeletePostUseCase {
-    constructor(private readonly postRepository: PostRepository) { }
+  constructor(private readonly postRepository: PostRepository) {}
 
-    execute(@Param() id: UUID): void {
-        this.postRepository.delete(id);
-    }
+  async execute(id: UUID): Promise<void> {
+    try {
+      await this.postRepository.delete(id);
+    } catch (error) {}
+  }
 }

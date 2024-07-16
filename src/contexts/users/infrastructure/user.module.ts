@@ -13,29 +13,29 @@ import { JWT_CONSTANT } from "src/contexts/shared/secret/jwt.constant";
 import { JwtHelper } from "src/contexts/shared/utils/jwt";
 
 @Module({
-    imports: [
-        JwtModule.registerAsync({
-            imports: [ConfigModule],
-            useFactory: async (configService: ConfigService) => ({
-                secret: JWT_CONSTANT,
-                signOptions: { expiresIn: '1d' }
-            })
-        }),
-    ],
-    controllers: [LoginController],
-    providers: [
-        FindOneUserUseCase,
-        LocalStrategy,
-        JwtStrategy, 
-        ValidateUser,
-        InMemoryUserRepository,
-        LoginUseCase,
-        JwtHelper,
-        {
-            provide: UserRepository,
-            useExisting: InMemoryUserRepository
-        }
-    ],
-    exports: [FindOneUserUseCase, JwtModule],
+  imports: [
+    JwtModule.registerAsync({
+      imports: [ConfigModule],
+      useFactory: async (configService: ConfigService) => ({
+        secret: JWT_CONSTANT,
+        signOptions: { expiresIn: "1d" },
+      }),
+    }),
+  ],
+  controllers: [LoginController],
+  providers: [
+    FindOneUserUseCase,
+    LocalStrategy,
+    JwtStrategy,
+    ValidateUser,
+    InMemoryUserRepository,
+    LoginUseCase,
+    JwtHelper,
+    {
+      provide: UserRepository,
+      useExisting: InMemoryUserRepository,
+    },
+  ],
+  exports: [FindOneUserUseCase, JwtModule],
 })
-export class UserModule { }
+export class UserModule {}

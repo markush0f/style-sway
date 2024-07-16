@@ -1,1 +1,1 @@
-export const JWT_CONSTANT = 'ahfdahdagrhquwiTGRr';
+export const JWT_CONSTANT = "ahfdahdagrhquwiTGRr";

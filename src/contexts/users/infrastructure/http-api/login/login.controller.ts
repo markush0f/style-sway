@@ -4,15 +4,15 @@ import { LoginHttpDto } from "./login.http-dto";
 import { Public } from "src/contexts/shared/decorators/public.decorator";
 import { ReturnUser } from "src/contexts/shared/types/returnUser.type";
 
-@Controller('users')
+@Controller("users")
 export class LoginController {
-    constructor(private readonly loginUseCase: LoginUseCase) { }
+  constructor(private readonly loginUseCase: LoginUseCase) {}
 
-    @Public()
-    // Buscar solucion para las estrategias
-    // @UseGuards(AuthGuard('local'))
-    @Post('login')
-    async run(@Body() loginDto: LoginHttpDto): Promise<{ accessToken: string, user: ReturnUser }> {
-        return await this.loginUseCase.execute(loginDto);
-    }
+  @Public()
+  // Buscar solucion para las estrategias
+  // @UseGuards(AuthGuard('local'))
+  @Post("login")
+  async run(@Body() loginDto: LoginHttpDto): Promise<{ accessToken: string; user: ReturnUser }> {
+    return await this.loginUseCase.execute(loginDto);
+  }
 }

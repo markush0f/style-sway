@@ -10,25 +10,32 @@ import { LikePostUseCase } from "../app/like-post-use-case/like-post.use.case";
 import { UnlikePostUseCase } from "../app/unlike-post-use-case/unlike-post.use.case";
 import { LikePostController } from "./http-api/like-post/like-post.controller";
 import { UnlikePostController } from "./http-api/unlike-post/unlike-post.controller";
+import { UserRepository } from "src/contexts/users/domain/user.repository";
+import { InMemoryUserRepository } from "src/contexts/users/infrastructure/repositories/in-memory.user.repository";
+import { FindPostsUserIdController } from "./http-api/find-posts-user-id/find-posts-user-id.controller";
+import { FindPostsUserIdUseCase } from "../app/find-posts-user-id-use-case/find-posts-user-id.use.case";
 
 @Module({
-    controllers: [CreatePostController, FindPostByIdController, LikePostController, UnlikePostController],
-    providers: [
-        CreatePostUseCase,
-        FindPostByIdUseCase,
-        DeletePostUseCase,
-        LikePostUseCase,
-        UnlikePostUseCase,
-        InMemoryPostRepository,
-        {
-            provide: PostRepository,
-            useExisting: InMemoryPostRepository
-            // Cuando creamos una instancia de PostRepository, lo que haremos es que la inyección de dependencias de PostRepository se hará con la clase inMemoryPostRepository
-        }
-    ],
-    exports: [CreatePostUseCase, FindPostByIdUseCase, LikePostUseCase, UnlikePostUseCase]
+  controllers: [CreatePostController, FindPostByIdController, LikePostController, UnlikePostController, FindPostsUserIdController],
+  providers: [
+    CreatePostUseCase,
+    FindPostByIdUseCase,
+    DeletePostUseCase,
+    LikePostUseCase,
+    UnlikePostUseCase,
+    FindPostsUserIdUseCase,
+    InMemoryPostRepository,
+    InMemoryUserRepository,
+    {
+      provide: PostRepository,
+      useExisting: InMemoryPostRepository,
+      // Cuando creamos una instancia de PostRepository, lo que haremos es que la inyección de dependencias de PostRepository se hará con la clase inMemoryPostRepository
+    },
+    {
+      provide: UserRepository,
+      useExisting: InMemoryUserRepository,
+    },
+  ],
+  exports: [CreatePostUseCase, FindPostByIdUseCase, LikePostUseCase, UnlikePostUseCase],
 })
-export class PostModule {
-
-
-}
+export class PostModule {}
