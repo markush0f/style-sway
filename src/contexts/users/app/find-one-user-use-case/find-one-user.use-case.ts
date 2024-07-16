@@ -16,6 +16,6 @@ export class FindOneUserUseCase {
             throw new UserNotFoundException(id);
         }
         return { user: user.toValue() };
-        
+
     }
 }
