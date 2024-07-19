@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { UserRepository } from "../../domain/user.repository";
 import { LoginUserDto } from "./login.dto";
-import { User } from "../../domain/user.entity";
+import { User } from "../../domain/user.model";
 import { ValidateUser } from "src/contexts/shared/utils/validate-user";
 import { UserUnauthorizedException } from "../../domain/exceptions/user-unauthorized.exception";
 import { UserNotFoundExceptionByEmail } from "../../domain/exceptions/user-not-found.exception";

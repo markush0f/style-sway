@@ -1,44 +1,22 @@
-import { randomUUID, UUID } from "crypto";
+import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
-export interface PrimitiveUser {
-  id: UUID;
+@Entity('users')
+export class UserEntity {
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
+
+  @Column({ length: 50 })
   name: string;
+
+  @Column({ length: 50 })
   surname: string;
+
+  @Column()
   birth: string;
+
+  @Column({ unique: true })
   email: string;
+
+  @Column()
   password: string;
-  // postsIds: UUID;
-}
-
-export class User {
-  constructor(private attributes: PrimitiveUser) {}
-
-  static create(createUser: {
-    name: string;
-    surname: string;
-    birth: string;
-    email: string;
-    password: string;
-    // userId: UUID;
-  }): User {
-    return new User({
-      id: randomUUID(),
-      name: createUser.name,
-      surname: createUser.surname,
-      birth: createUser.birth,
-      email: createUser.email,
-      password: createUser.password,
-    });
-  }
-
-  toValue(): PrimitiveUser {
-    return {
-      id: this.attributes.id,
-      name: this.attributes.name.toString(),
-      surname: this.attributes.surname.toString(),
-      birth: this.attributes.birth,
-      email: this.attributes.email.toString(),
-      password: this.attributes.password.toString(),
-    };
-  }
 }

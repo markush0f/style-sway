@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { UserRepository } from "../../domain/user.repository";
-import { PrimitiveUser, User } from "../../domain/user.entity";
+import { PrimitiveUser, User } from "../../domain/user.model";
 import { UUID } from "crypto";
 import { UserNotFoundException } from "../../domain/exceptions/user-not-found.exception";
 

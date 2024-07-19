@@ -1,5 +1,5 @@
 import { randomUUID, UUID } from "crypto";
-import { PrimitiveUser, User } from "../../domain/user.entity";
+import { PrimitiveUser, User } from "../../domain/user.model";
 import { UserRepository } from "../../domain/user.repository";
 import * as bcrypt from "bcrypt";
 import { SignupDto } from "../../app/signup-use-case/signup-dto";

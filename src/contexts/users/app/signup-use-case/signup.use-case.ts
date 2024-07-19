@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
 import { UserRepository } from "../../domain/user.repository";
-import { PrimitiveUser, User } from "../../domain/user.entity";
+import { PrimitiveUser, User } from "../../domain/user.model";
 import { SignupDto } from "./signup-dto";
 import { JwtHelper } from "src/contexts/shared/utils/jwt";
 import { UserAlreadyExistsException } from "../../domain/exceptions/user-already-exists.exception";

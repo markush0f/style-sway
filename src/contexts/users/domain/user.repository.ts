@@ -1,5 +1,5 @@
 import { UUID } from "crypto";
-import { User } from "./user.entity";
+import { User } from "./user.model";
 import { SignupDto } from "../app/signup-use-case/signup-dto";
 
 export abstract class UserRepository {
