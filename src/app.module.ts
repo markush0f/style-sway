@@ -4,7 +4,7 @@ import { UserModule } from "./contexts/users/infrastructure/user.module";
 import { ConfigModule } from "@nestjs/config";
 import { APP_GUARD } from "@nestjs/core";
 import { InMemoryUserRepository } from "./contexts/users/infrastructure/repositories/in-memory.user.repository";
-import { AuthGuard } from "./shared/guards/auth.guard";
+import { AuthGuard } from "./common/guards/auth.guard";
 
 @Module({
   imports: [PostModule, UserModule, ConfigModule.forRoot({ isGlobal: true }), InMemoryUserRepository],

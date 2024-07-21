@@ -1,11 +1,11 @@
-import { Injectable } from "src/contexts/shared/dependency-injection/injectable";
 import { Post, PrimitivePost } from "../../domain/post.entity";
 import { PostRepository } from "../../domain/post.repository";
 import { CreatePostDto } from "./create-post.dto";
 import { UserRepository } from "src/contexts/users/domain/user.repository";
-import { User } from "src/contexts/users/domain/user.entity";
 import { UserNotFoundException } from "src/contexts/users/domain/exceptions/user-not-found.exception";
 import { UUID } from "crypto";
+import { Injectable } from "src/common/dependency-injection/injectable";
+import { User } from "src/contexts/users/domain/user.model";
 
 @Injectable()
 export class CreatePostUseCase {

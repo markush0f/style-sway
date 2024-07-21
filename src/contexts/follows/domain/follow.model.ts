@@ -1,5 +1,5 @@
 import { UUID, randomUUID } from 'crypto';
-import { User } from '../users/domain/user.model';
+import { User } from '../../users/domain/user.model';
 
 export interface PrimitiveFollow {
   id: UUID;
