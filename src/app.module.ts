@@ -5,6 +5,7 @@ import { ConfigModule } from "@nestjs/config";
 import { APP_GUARD } from "@nestjs/core";
 import { InMemoryUserRepository } from "./contexts/users/infrastructure/repositories/in-memory.user.repository";
 import { AuthGuard } from "./common/guards/auth.guard";
+import { InMemoryFollowsRepository } from "./contexts/follows/infrastructure/repositories/in-memory.follows.repository";
 
 @Module({
   imports: [PostModule, UserModule, ConfigModule.forRoot({ isGlobal: true }), InMemoryUserRepository],
@@ -17,11 +18,14 @@ import { AuthGuard } from "./common/guards/auth.guard";
   ],
 })
 export class AppModule {
-  constructor(private readonly userRepository: InMemoryUserRepository) {
-    this.initialize();
-  }
-  async initialize() {
-    await this.userRepository.initializeUsers();
-    console.log(this.userRepository.users);
-  }
+  // constructor(
+  //   private readonly userRepository: InMemoryUserRepository,
+  //   private readonly followRepository: InMemoryFollowsRepository
+  // ) {
+  //   this.initialize();
+  // }
+  // async initialize() {
+  //   await this.userRepository.initializeUsers();
+  //   console.log(this.userRepository.users);
+  // }
 }

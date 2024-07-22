@@ -3,19 +3,19 @@ import { User } from '../../users/domain/user.model';
 
 export interface PrimitiveFollow {
   id: UUID;
-  follower: User;
-  followed: User;
+  followerId: UUID;
+  followedId: UUID;
   followDate: Date;
 }
 
 export class Follow {
   constructor(private attributes: PrimitiveFollow) {}
 
-  static create(follower: User, followed: User): Follow {
+  static create(followerId: UUID, followedId: UUID): Follow {
     return new Follow({
       id: randomUUID(),
-      follower,
-      followed,
+      followerId,
+      followedId,
       followDate: new Date(),
     });
   }
@@ -28,12 +28,12 @@ export class Follow {
     return this.attributes.id;
   }
 
-  get follower(): User {
-    return this.attributes.follower;
+  get follower(): UUID {
+    return this.attributes.followerId;
   }
 
-  get followed(): User {
-    return this.attributes.followed;
+  get followed(): UUID {
+    return this.attributes.followedId;
   }
 
   get followDate(): Date {

@@ -1,29 +1,57 @@
-import { UUID } from "crypto";
-import { Follow } from "../../domain/follow.model";
+import { randomUUID, UUID } from "crypto";
+import { Follow, PrimitiveFollow } from "../../domain/follow.model";
 import { FollowRepository } from "../../domain/follow.repository";
-import { User } from "src/contexts/users/domain/user.model";
+import { PrimitiveUser } from "src/contexts/users/domain/user.model";
+import { InMemoryUserRepository } from "src/contexts/users/infrastructure/repositories/in-memory.user.repository";
 
 export class InMemoryFollowsRepository extends FollowRepository {
-    follows: Follow[] = [];
 
-    async follow(follower: User, followed: User): Promise<void> {
-        const follow = Follow.create(follower, followed);
-        this.follows.push(follow);
-        return Promise.resolve();
+    constructor(
+        private readonly inMemoryUserRepository: InMemoryUserRepository,
+    ) {
+        super();
+        this.initializeFollows()
+    }
+    private users: PrimitiveUser[] = this.inMemoryUserRepository.users;
+    follows: PrimitiveFollow[] = [
+
+    ];
+
+    async initializeFollows(): Promise<void> {
+        this.follows = [
+            {
+                id: randomUUID(),
+                followerId: this.users[0].id,
+                followedId: this.users[1].id,
+                followDate: new Date()
+            },
+            {
+                id: randomUUID(),
+                followerId: this.users[1].id,
+                followedId: this.users[0].id,
+                followDate: new Date()
+            }
+        ]
     }
 
-    async unfollow(follower: User, followed: User): Promise<void> {
-        this.follows = this.follows.filter((follow) => follow.follower.id !== follower.id && follow.followed.id !== followed.id);
+    async follow(followerId: UUID, followedId: UUID): Promise<PrimitiveFollow> {
+        const follow = Follow.create(followerId, followedId);
+        this.follows.push(follow.toValue());
+        return follow.toValue();
+    }
+
+    async unfollow(followerId: UUID, followedId: UUID): Promise<void> {
+        this.follows = this.follows.filter((follow) => follow.followerId !== followerId && follow.followedId !== followedId);
         console.log(this.follows);
     }
 
-    async findAllByFollowerId(followerId: UUID): Promise<Follow[]> {
-        return this.follows.filter((follow) => follow.follower.id === followerId);
+    async findAllByFollowerId(followerId: UUID): Promise<PrimitiveFollow[]> {
+        return this.follows.filter((follow) => follow.followerId === followerId);
 
     }
 
-    async findAllByFollowedId(followedId: UUID): Promise<Follow[]> {
-        return this.follows.filter((follow) => follow.followed.id === followedId);
+    async findAllByFollowedId(followedId: UUID): Promise<PrimitiveFollow[]> {
+        return this.follows.filter((follow) => follow.followedId === followedId);
     }
 
 }
